@@ -11,6 +11,26 @@ public class Vigenere {
         alphabetMod = alphabeto.length();
     }
 
+    public String encode(String msgOriginal, String mode) {
+        String result = "";
+        //actualizamos las claves segun el modo
+        switch (mode){
+            case "classic":
+                keyGenClassic(msgOriginal);
+                break;
+            case "flux":
+                keyGenFlux(msgOriginal);
+                break;
+            default:
+                throw new IllegalArgumentException(mode + " is not a valid mode");
+        }
+        //tenemos el mensaje original y la key, para sacar el codificado tenemos que hacer la suma de ambos
+        result = addition(msgOriginal);
+
+        return result;
+    }
+
+
 
     public String decode(String msgCifrado, String mode) {
         String result = "";
@@ -103,6 +123,33 @@ public class Vigenere {
         return sb.toString();
 
 
+    }
+    private String addition(String msgOriginal) {
+        //Obtenemos valores decimales del mensaje y de la key para restarlos
+        ArrayList<Integer> valoresMsgCifrado = getDecimalValues(msgOriginal);
+        ArrayList<Integer> valoresKeyCifrados = getDecimalValues(this.keyK);
+        //Restamos los valores
+        ArrayList<Integer> valoresResultado = new ArrayList<Integer>();
+        for (int i = 0; i < valoresMsgCifrado.size() ; i++) {
+            int tempVal = valoresMsgCifrado.get(i) + valoresKeyCifrados.get(i);
+            while (tempVal <0){
+                tempVal+=alphabetMod;
+            }
+            while (tempVal >= alphabetMod){
+                tempVal-=alphabetMod;
+            }
+            valoresResultado.add(tempVal);
+        }
+
+        //Construimos el mensaje traduciendo los valores a su correspondiente simbolo
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < valoresResultado.size(); i++) {
+            sb.append(alphabet.charAt(valoresResultado.get(i)));
+        }
+
+        //retornamos el valor
+        return sb.toString();
     }
 
     private ArrayList<Integer> getDecimalValues(String msgCifrado) {
