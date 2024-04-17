@@ -1,3 +1,6 @@
+/**
+ * @author José Antonio López Pérez (ChispyDev)
+ */
 public class Main {
     public static void main(String[] args) {
 
@@ -5,15 +8,11 @@ public class Main {
 
     }
 
-    private static void ejercicio0Classic() {
-        String alphabeto = "ABCDE";
-        String claveK = "EC";
-        String msgCifrado = "EDBAD";
-        Vigenere coder = new Vigenere(alphabeto, claveK);
-        String msgOriginal = coder.decode(msgCifrado, "classic");
-        printFormat(msgOriginal);
-         }
-
+    /**
+     * printFormat uses System.out.print to show in console the output from Vigenere coder.
+     *      when 2 " " are concatenated the method print "\n" instead.
+     * @param msgOriginal
+     */
     private static void printFormat(String msgOriginal) {
         System.out.println("----------------------------------------");
         for (int i = 0; i <msgOriginal.length() ; i++) {
@@ -29,6 +28,17 @@ public class Main {
         }
         System.out.println("\n----------------------------------------");
     }
+
+
+    //  SOME EXAMPLES TO TEST THE IMPLEMENTATION
+    private static void ejercicio0Classic() {
+        String alphabeto = "ABCDE";
+        String claveK = "EC";
+        String msgCifrado = "EDBAD";
+        Vigenere coder = new Vigenere(alphabeto, claveK);
+        String msgOriginal = coder.decode(msgCifrado, "classic");
+        printFormat(msgOriginal);
+         }
 
     private static void ejercicio0Flux() {
         String alphabeto = "ABCDE";
