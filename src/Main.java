@@ -83,6 +83,7 @@ public class Main {
                 {12, 11, 68, 55, 22, 19} };
         Hill hill = new Hill(alphabeto, claveCifrado);
         String msgDescifrado = hill.decode("3M)-y--2kdHÑSY-ZcG)y.UÚ8m,ZvlñíLAAÑsYO3A80r3y?C0:óon2zwbzdGÁáaAZTfú¿QHuYqqMq(Cí8á6cCW8KÍ-CaB7DJ1XczQZJ(eOzU8fvHAbúIpwáI-,sU2PBjjñPJBÉñx,UÚ1?RáÁÚRéó.pwGA9í6yZ)áééJTbwor¿w,?Vú--gFgÁFÍzaYiUtTx3B,ccóGahw óáiYAJOfD,zuéV:óNbÚÉ6é1WWoÚg(p7jGxESÚsGxLOVvNppqPgH0u6:Q0Y:É¿Gc)ñBLkBpMskWúÓÁa¿dU,NTÍú8ñhRbYósÚí:hAmBmiEgxg0VcIélÁ É)q,adóhÓloxLJlcc(yjÁ¿ñ8áOvn.TonwiPjgG2)C.EeKOw0l60Dig é(CEhFPÍÑiqzÚHmaxF4USavqÚZoéÉi(nfRv,t?ppEQCúd)crÑbú4:í?.d)crÑbIBñáIÚMC1vr(LMRNyÑ3ÓQ4iÚ¿.l  rtMcpcÁZfeñÉZ,Ó¿)pWb0ÁBB?w77UwÑj¿jrP25txdhÁ");
+        System.out.println(msgDescifrado.length());
         printFormat(msgDescifrado);
     }
     // EXERCICES CIFRADO AFIN

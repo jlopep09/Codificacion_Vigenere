@@ -1,3 +1,7 @@
+
+
+import Jama.Matrix;
+
 import java.util.ArrayList;
 
 /**
@@ -25,10 +29,20 @@ public class Hill {
         int[][] decodeMatrix = getDecryptionMatrix();
         ArrayList<String> msgBlocks = makeItBlocks(msg, longitudBloque);
         int[][] blocksMatrix = matrixIt(msgBlocks);
-        System.out.println(blocksMatrix);
+
+
         int[][] resultMatrix = MatrixProduct(blocksMatrix, decodeMatrix);
+
+        StringBuilder sb1 = new StringBuilder();
+        for (int i = 0; i < resultMatrix[0].length; i++) {
+            sb1.append(resultMatrix[resultMatrix.length-1][i]);
+        }
+
+        if(Integer.valueOf(sb1.toString())%longitudBloque!=0){
+            System.out.println("cuidao");
+        }
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < resultMatrix.length; i++) {
+        for (int i = 0; i < resultMatrix.length-1; i++) {
             for (int j = 0; j <resultMatrix[i].length ; j++) {
                 sb.append(alphabet.charAt(resultMatrix[i][j]));
             }
@@ -67,14 +81,31 @@ public class Hill {
     }
 
     private int[][] getDecryptionMatrix() {
-        int result[][] = {
-                        {21, 83, 34,  78, 20, 65},
-                        {67, 74, 45, 78, 64, 27},
-                        {66, 67, 40, 28, 24, 62},
-                        {81, 55, 76, 31, 20, 6},
-                        {31, 33, 29, 41, 59, 45},
-                        {78, 29, 73, 13, 30, 72} };
+
+        int result[][] = InversaMatrizModulo.inversaMatrizModulo(claveCifrado, alphabet.length());
+
         return result;
+    }
+
+
+    // Función para imprimir una matriz
+    public static void imprimirMatriz(int[][] matriz) {
+        int n = matriz.length;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                System.out.print(matriz[i][j] + "\t");
+            }
+            System.out.println();
+        }
+    }
+    public static void imprimirMatriz(double[][] matriz) {
+        int n = matriz.length;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                System.out.print(matriz[i][j] + "\t");
+            }
+            System.out.println();
+        }
     }
 
     /**
