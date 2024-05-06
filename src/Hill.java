@@ -21,10 +21,63 @@ public class Hill {
     }
 
     public String encode(String msg){
-        return "";
+        System.out.println("msg initial val "+msg.length());
+        ArrayList<String> msgBlocks = makeItBlocks(msg, longitudBloque);
+        System.out.println("bloques "+msgBlocks.size());
+        int[][] blocksMatrix = matrixIt(msgBlocks);
+
+        long valorBloqueFinal = msg.length();
+        ArrayList<Integer> bloqueFinal = getRepresentationModule(valorBloqueFinal, longitudBloque);
+        int[][] blocksMatrix2 = new int[blocksMatrix.length+1][blocksMatrix[0].length];
+        for (int i = 0; i < blocksMatrix.length; i++) {
+            for (int j = 0; j < blocksMatrix[0].length; j++) {
+                blocksMatrix2[i][j] = blocksMatrix[i][j];
+            }
+        }
+        System.out.println(bloqueFinal);
+        for (int i = blocksMatrix2[0].length-1; i >= 0; i--) {
+            if(!bloqueFinal.isEmpty()){
+                blocksMatrix2[blocksMatrix2.length-1][i] = bloqueFinal.removeFirst();
+            }
+        }
+        blocksMatrix = blocksMatrix2;
+
+        imprimirMatriz(blocksMatrix);
+        StringBuilder sb = new StringBuilder();
+        int[][] resultMatrix = MatrixProduct(blocksMatrix, claveCifrado);
+        for (int i = 0; i < resultMatrix.length; i++) {
+            for (int j = 0; j <resultMatrix[i].length ; j++) {
+                if(resultMatrix[i][j] == -1){
+                    sb.append("0");
+                }else{
+                    sb.append(alphabet.charAt(resultMatrix[i][j]));
+                }
+
+            }
+        }
+
+        return sb.toString();
+    }
+    private ArrayList<Integer> getRepresentationModule(long decimalValue, int length) {
+        System.out.println("the repre val is "+decimalValue);
+        ArrayList<Integer> result = new ArrayList<>();
+        for (int i = length-1; i >= 0; i--) {
+            // Calcular el valor actual dividido por la base elevada a la potencia actual
+            int digit = (int) (decimalValue / Math.pow(alphabet.length(), i));
+
+            // Añadir el dígito al resultado
+            result.addFirst(digit);
+
+            // Actualizar el valor decimal restando el dígito calculado
+            decimalValue -= digit * Math.pow(alphabet.length(), i);
+
+        }
+        return result;
+
     }
 
     public String decode(String msg){
+        System.out.println("ulala monsegui "+msg.length());
         int[][] decodeMatrix = getDecryptionMatrix();
         ArrayList<String> msgBlocks = makeItBlocks(msg, longitudBloque);
         int[][] blocksMatrix = matrixIt(msgBlocks);
@@ -102,7 +155,12 @@ public class Hill {
         int[][] blocksMatrix = new int[blocks.size()][longitudBloque];
         for(int i = 0; i<blocks.size(); i++){
             for(int j = 0; j<longitudBloque; j++){
-                blocksMatrix[i][j] = alphabet.indexOf(blocks.get(i).charAt(j));
+                if(alphabet.indexOf(blocks.get(i).charAt(j))<0){
+                    blocksMatrix[i][j] = 0;
+                }else{
+                    blocksMatrix[i][j] = alphabet.indexOf(blocks.get(i).charAt(j));
+                }
+
             }
         }
         return blocksMatrix;
@@ -126,15 +184,6 @@ public class Hill {
             System.out.println();
         }
     }
-    public static void imprimirMatriz(double[][] matriz) {
-        int n = matriz.length;
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                System.out.print(matriz[i][j] + "\t");
-            }
-            System.out.println();
-        }
-    }
 
     /**
      * This function is used to create an arraylist of String segments from a full String given a specific blockSize
@@ -153,7 +202,7 @@ public class Hill {
             int toAdd = blockSize - msg.length();
             String block = msg;
             for (int i = 0; i < toAdd; i++) {
-                block = block+"0";
+                block = block+"Ç";
             }
             result.add(block);
         }

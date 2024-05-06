@@ -27,7 +27,60 @@ public class Afin {
         // agregamos bloque final de numero de digitos y rellenamos con 0s
         // codificamos los bloques
 
-        return "";
+        System.out.println("msg initial val "+msg.length());
+        ArrayList<String> msgBlocks = makeItBlocks(msg, longitudBloque);
+        System.out.println("bloques "+msgBlocks.size());
+        int[][] blocksMatrix = matrixIt(msgBlocks);
+
+        long valorBloqueFinal = msg.length();
+        ArrayList<Integer> bloqueFinal = getRepresentationModule(valorBloqueFinal, longitudBloque);
+        int[][] blocksMatrix2 = new int[blocksMatrix.length+1][blocksMatrix[0].length];
+        for (int i = 0; i < blocksMatrix.length; i++) {
+            for (int j = 0; j < blocksMatrix[0].length; j++) {
+                blocksMatrix2[i][j] = blocksMatrix[i][j];
+            }
+        }
+        System.out.println(bloqueFinal);
+        for (int i = blocksMatrix2[0].length-1; i >= 0; i--) {
+            if(!bloqueFinal.isEmpty()){
+                blocksMatrix2[blocksMatrix2.length-1][i] = bloqueFinal.removeFirst();
+            }
+        }
+        blocksMatrix = blocksMatrix2;
+
+        imprimirMatriz(blocksMatrix);
+        StringBuilder sb = new StringBuilder();
+        int[][] resultMatrix = MatrixProduct(blocksMatrix, claveCifrado);
+        resultMatrix = addOffset(resultMatrix);
+        for (int i = 0; i < resultMatrix.length; i++) {
+            for (int j = 0; j <resultMatrix[i].length ; j++) {
+                if(resultMatrix[i][j] == -1){
+                    sb.append("0");
+                }else{
+                    sb.append(alphabet.charAt(resultMatrix[i][j]));
+                }
+
+            }
+        }
+
+        return sb.toString();
+    }
+    private ArrayList<Integer> getRepresentationModule(long decimalValue, int length) {
+        System.out.println("the repre val is "+decimalValue);
+        ArrayList<Integer> result = new ArrayList<>();
+        for (int i = length-1; i >= 0; i--) {
+            // Calcular el valor actual dividido por la base elevada a la potencia actual
+            int digit = (int) (decimalValue / Math.pow(alphabet.length(), i));
+
+            // Añadir el dígito al resultado
+            result.addFirst(digit);
+
+            // Actualizar el valor decimal restando el dígito calculado
+            decimalValue -= digit * Math.pow(alphabet.length(), i);
+
+        }
+        return result;
+
     }
 
     public String decode(String msg){
@@ -91,6 +144,18 @@ public class Afin {
                 while(blocksMatrix[i][j]<0){
                     blocksMatrix[i][j] += alphabet.length();
                 }
+            }
+        }
+        return blocksMatrix;
+    }
+    private int[][] addOffset(int[][] blocksMatrix) {
+        for (int i = 0; i < blocksMatrix.length ; i++) {
+            for (int j = 0; j < blocksMatrix[0].length; j++) {
+                blocksMatrix[i][j]= blocksMatrix[i][j] + claveCifrado2[j];
+                while(blocksMatrix[i][j]<0){
+                    blocksMatrix[i][j] += alphabet.length();
+                }
+                blocksMatrix[i][j]= blocksMatrix[i][j] % alphabet.length();
             }
         }
         return blocksMatrix;

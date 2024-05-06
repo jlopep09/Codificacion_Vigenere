@@ -3,8 +3,8 @@
  */
 public class Main {
     public static void main(String[] args) {
-        ejercicio1Hill();
-        //ejercicio1Afin();
+        //ejercicio1Hill();
+        ejercicio1Afin();
 
     }
 
@@ -85,6 +85,7 @@ public class Main {
         String msgDescifrado = hill.decode("3M)-y--2kdHÑSY-ZcG)y.UÚ8m,ZvlñíLAAÑsYO3A80r3y?C0:óon2zwbzdGÁáaAZTfú¿QHuYqqMq(Cí8á6cCW8KÍ-CaB7DJ1XczQZJ(eOzU8fvHAbúIpwáI-,sU2PBjjñPJBÉñx,UÚ1?RáÁÚRéó.pwGA9í6yZ)áééJTbwor¿w,?Vú--gFgÁFÍzaYiUtTx3B,ccóGahw óáiYAJOfD,zuéV:óNbÚÉ6é1WWoÚg(p7jGxESÚsGxLOVvNppqPgH0u6:Q0Y:É¿Gc)ñBLkBpMskWúÓÁa¿dU,NTÍú8ñhRbYósÚí:hAmBmiEgxg0VcIélÁ É)q,adóhÓloxLJlcc(yjÁ¿ñ8áOvn.TonwiPjgG2)C.EeKOw0l60Dig é(CEhFPÍÑiqzÚHmaxF4USavqÚZoéÉi(nfRv,t?ppEQCúd)crÑbú4:í?.d)crÑbIBñáIÚMC1vr(LMRNyÑ3ÓQ4iÚ¿.l  rtMcpcÁZfeñÉZ,Ó¿)pWb0ÁBB?w77UwÑj¿jrP25txdhÁ");
         System.out.println(msgDescifrado.length());
         printFormat(msgDescifrado);
+        System.out.println(hill.encode(msgDescifrado));
     }
     // EXERCICES CIFRADO AFIN
     private static void ejercicio1Afin(){
@@ -102,5 +103,6 @@ public class Main {
         String msgDescifrado = afin.decode("¿ÍlÚgÑ0ucPsÁó:KÓHaw60íRbp5AuvpéUs9m8.Q0zr?ZDYlCZ0lÁNzaÍÚ9SlÚ;hR7:(GWACB6H8OláxlRLóAcGÍoeñPj6,e)0Égn5ZÓJ;,(ÚCEwópCÁ;G0lOu3úzjfÍoeñPivZhsVfe6;QnlBz5S6(;NOpLvO¿GjkrsIÚÚXUÁga?ÍÑ)u0.?9éRfHN4ÚmmaJ4o49BFNTÓóAyóeY0B2rñjpnjenXQóRoáxfuTÚZFÚmpóG9v-úld8S3XáéÓ8ÚALz-;NníPídA ÓUeÍEd.o vwgu:eñT8)E7U-?hXeqÚHgpdÉhKiEñTáTxC8)KybPd.ÑZVuálwf(8lú;8.xnóCsWP1JP)ñn9ÉÚ;4iÍék9.lCAsÉOB");
         System.out.println(msgDescifrado.length());
         printFormat(msgDescifrado);
+        System.out.println(afin.encode(msgDescifrado));
     }
 }
