@@ -4,7 +4,7 @@
 public class Main {
     public static void main(String[] args) {
 
-        ejercicio1();
+        ejercicio1Hill();
 
     }
 
@@ -31,7 +31,9 @@ public class Main {
 
 
     //  SOME EXAMPLES TO TEST THE IMPLEMENTATION
-    private static void ejercicio0Classic() {
+
+    //  VIGENERE EXERCICES
+    private static void VigenereEjercicio0Classic() {
         String alphabeto = "ABCDE";
         String claveK = "EC";
         String msgCifrado = "EDBAD";
@@ -40,7 +42,7 @@ public class Main {
         printFormat(msgOriginal);
          }
 
-    private static void ejercicio0Flux() {
+    private static void ejercicio0FluxVigenere() {
         String alphabeto = "ABCDE";
         String claveK = "EC";
         String msgCifrado = "EDDBD";
@@ -48,7 +50,7 @@ public class Main {
         String msgOriginal = coder.decode(msgCifrado, "flux");
         printFormat(msgOriginal);
     }
-    private static void ejercicio1() {
+    private static void ejercicio1Vigenere() {
         String alphabeto = "abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZáéíóúÁÉÍÓÚ0123456789 ,.:!-¿?()";
         String claveK = "UCBxHcl!6jñydiFoMB!vol!:da";
         String msgCifrado = "cCTñScE((ÚHGfiXfúPhmqzgi:uÍCrzVtCc vHC:lJfMHovhb4xAi3VFKxfsp AGyv(YsáSWvHb¿iopÁKDxKcD5ÉnGofpJGÁP5mfA(lr ÁCrIhis¿6)o-vpHoCFnmAFs3veÍEJIRcd4pneGjCFzCrgKrz4kxeLGMñHiF!ÉñySBmvrPT?zfFh3ñuáCSñLnop6mCo:oFqTB4KICj3oá3sCxPqbñbuñLgwvzMr?DHE!gfiUsN!Z.njeCñp:(X8WP4CoJ4ñpaLEPOYkohgneKdBJAjUcxod43: Sk8mr:bB6AIIl(7JóBevAs53NiÚVPño,-35";
@@ -58,7 +60,7 @@ public class Main {
         System.out.println(msgRecifrado);
         printFormat(msgOriginal);
     }
-    private static void ejercicio2() {
+    private static void ejercicio2Vigenere() {
         String alphabeto = "abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZáéíóúÁÉÍÓÚ0123456789 ,.:!-¿?()";
         String claveK = "ÑaKtfDaZ2F77DU8ExqtUVdñQmzw1úF";
         String msgCifrado = "aeWMfPd4íJaÍH3duBJNUMpCSsDñéÉTé5K2ÓtjIYVñp!VS9ópUT5Gúr4vcOwxdna!ó0UÁÑÚQ Í1 ACú4EmARh(VWxt6t23!SL14Oú NG-rt¿Áe4aA0YjeÓÍiTLóuñÍV¿i7S7z4KCÍEDÍLcPL9qpÍYxIz7Ó35í5JLs45-FFy-xÍ2:5O(V:Ú.,NAmxFlN(1F!klv:HbmLWRGaCk!1Ú87:YYD7HmGxGJh(qwsYÓ3-yDiUIñaPI¿E-0hJWzñx.ZrJÓ.QUOxVhú2jGzu buoEy!I3f10?eaCáñ.SHUFNCsAFJQaiwZlHS:qf8xcÉÁI(X¿22lÉKFÓÍaztñyS0PZ suxé(f0CÉhb(7Óxw,bóT5BorRQFVQQAHeÑ:o7ÑtyG,9gHEÚkO,uÍkÚéYI)8dyáG)-KR)Ú:pr5!JéBpAIOHFxNeaqSQr5Ñ";
@@ -68,4 +70,21 @@ public class Main {
         System.out.println(msgRecifrado);
         printFormat(msgOriginal);
     }
+
+    // EXERCICES CIFRADO HILL
+    private static void ejercicio1Hill(){
+        String alphabeto = "aábcdeéfghiíjklmnñoópqrstuúvwxyzAÁBCDEÉFGHIÍJKLMNÑOÓPQRSTUÚVWXYZ0123456789 ,.:;-()¿?";
+        int[][] claveCifrado = {
+                {63, 57, 3,  29, 46, 35},
+                {30, 52, 21, 80, 44, 12},
+                {37, 23, 53, 60, 16, 56},
+                {77, 11, 82, 74, 46, 53},
+                {33, 56, 81, 72, 37, 37},
+                {12, 11, 68, 55, 22, 19} };
+        Hill hill = new Hill(alphabeto, claveCifrado);
+        String msgDescifrado = hill.decode("3M)-y--2kdHÑSY-ZcG)y.UÚ8m,ZvlñíLAAÑsYO3A80r3y?C0:óon2zwbzdGÁáaAZTfú¿QHuYqqMq(Cí8á6cCW8KÍ-CaB7DJ1XczQZJ(eOzU8fvHAbúIpwáI-,sU2PBjjñPJBÉñx,UÚ1?RáÁÚRéó.pwGA9í6yZ)áééJTbwor¿w,?Vú--gFgÁFÍzaYiUtTx3B,ccóGahw óáiYAJOfD,zuéV:óNbÚÉ6é1WWoÚg(p7jGxESÚsGxLOVvNppqPgH0u6:Q0Y:É¿Gc)ñBLkBpMskWúÓÁa¿dU,NTÍú8ñhRbYósÚí:hAmBmiEgxg0VcIélÁ É)q,adóhÓloxLJlcc(yjÁ¿ñ8áOvn.TonwiPjgG2)C.EeKOw0l60Dig é(CEhFPÍÑiqzÚHmaxF4USavqÚZoéÉi(nfRv,t?ppEQCúd)crÑbú4:í?.d)crÑbIBñáIÚMC1vr(LMRNyÑ3ÓQ4iÚ¿.l  rtMcpcÁZfeñÉZ,Ó¿)pWb0ÁBB?w77UwÑj¿jrP25txdhÁ");
+        printFormat(msgDescifrado);
+    }
+    // EXERCICES CIFRADO AFIN
+
 }
