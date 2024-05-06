@@ -1,3 +1,4 @@
+import java.math.BigInteger;
 import java.util.ArrayList;
 
 /**
@@ -20,32 +21,68 @@ public class Afin {
     }
 
     public String encode(String msg){
+        //MSG -> numeros seguidos segun alfabeto
+        // metemos dijitos aleatorios hasta que la parrafada tenga resto 0 respecto tam bloque
+        // troceamos en bloques
+        // agregamos bloque final de numero de digitos y rellenamos con 0s
+        // codificamos los bloques
+
         return "";
     }
 
     public String decode(String msg){
+        // decodificamos los bloques
         int[][] decodeMatrix = getDecryptionMatrix();
         ArrayList<String> msgBlocks = makeItBlocks(msg, longitudBloque);
         int[][] blocksMatrix = matrixIt(msgBlocks);
+
         blocksMatrix = removeOffset(blocksMatrix);
         int[][] resultMatrix = MatrixProduct(blocksMatrix, decodeMatrix);
+        imprimirMatriz(resultMatrix);
 
-        StringBuilder sb1 = new StringBuilder();
+        //Obtenemos bloque de cantidad de digitos
+        ArrayList<Integer> ultimoBloque = new ArrayList<>();
         for (int i = 0; i < resultMatrix[0].length; i++) {
-            sb1.append(resultMatrix[resultMatrix.length-1][i]);
+                ultimoBloque.add(resultMatrix[resultMatrix.length-1][i]);
         }
+        long numeroDigitos = getRepresentation(ultimoBloque, alphabet.length());
+        System.out.println("numero Digitos "+numeroDigitos);
+        System.out.println("msg.length() "+msg.length());
+        long numeroEliminar = msg.length()-longitudBloque-numeroDigitos;
+        System.out.println(numeroEliminar+"afdaf");
+        for (int i = resultMatrix[0].length-1; i >=0 ; i--) {
+            if(numeroEliminar>0){
+                resultMatrix[resultMatrix.length-2][i] = -1;
+                numeroEliminar--;
+            }
 
-        if(Integer.valueOf(sb1.toString())%longitudBloque!=0){
-            System.out.println("cuidao");
         }
+        imprimirMatriz(resultMatrix);
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < resultMatrix.length-1; i++) {
             for (int j = 0; j <resultMatrix[i].length ; j++) {
-                sb.append(alphabet.charAt(resultMatrix[i][j]));
+                if(resultMatrix[i][j] == -1){
+
+                }else{
+                    sb.append(alphabet.charAt(resultMatrix[i][j]));
+                }
+
             }
         }
+
         return sb.toString();
     }
+
+    private long getRepresentation(ArrayList<Integer> ultimoBloque, int length) {
+        BigInteger contador =new BigInteger("0");
+        for (int i = 0; i < ultimoBloque.size(); i++) {
+            BigInteger pow = new BigInteger((Math.pow(alphabet.length(), i)+"").substring(0,(Math.pow(alphabet.length(), i)+"").length()-2));
+            contador = contador.add(pow.multiply(new BigInteger(ultimoBloque.removeLast()+"")));
+        }
+        return contador.longValue();
+
+    }
+
 
     private int[][] removeOffset(int[][] blocksMatrix) {
         for (int i = 0; i < blocksMatrix.length ; i++) {
@@ -84,7 +121,12 @@ public class Afin {
         int[][] blocksMatrix = new int[blocks.size()][longitudBloque];
         for(int i = 0; i<blocks.size(); i++){
             for(int j = 0; j<longitudBloque; j++){
-                blocksMatrix[i][j] = alphabet.indexOf(blocks.get(i).charAt(j));
+                if(alphabet.indexOf(blocks.get(i).charAt(j))<0){
+                    blocksMatrix[i][j] = 0;
+                }else{
+                    blocksMatrix[i][j] = alphabet.indexOf(blocks.get(i).charAt(j));
+                }
+
             }
         }
         return blocksMatrix;
@@ -101,8 +143,8 @@ public class Afin {
     // Función para imprimir una matriz
     public static void imprimirMatriz(int[][] matriz) {
         int n = matriz.length;
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
+        for (int i = 0; i < matriz.length; i++) {
+            for (int j = 0; j < matriz[0].length; j++) {
                 System.out.print(matriz[i][j] + "\t");
             }
             System.out.println();
@@ -135,7 +177,7 @@ public class Afin {
             int toAdd = blockSize - msg.length();
             String block = msg;
             for (int i = 0; i < toAdd; i++) {
-                block = block+"0";
+                block = block+"Ç";
             }
             result.add(block);
         }

@@ -3,8 +3,8 @@
  */
 public class Main {
     public static void main(String[] args) {
-
-        ejercicio1Afin();
+        ejercicio1Hill();
+        //ejercicio1Afin();
 
     }
 
