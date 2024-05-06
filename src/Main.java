@@ -4,7 +4,7 @@
 public class Main {
     public static void main(String[] args) {
 
-        ejercicio1Hill();
+        ejercicio1Afin();
 
     }
 
@@ -87,5 +87,20 @@ public class Main {
         printFormat(msgDescifrado);
     }
     // EXERCICES CIFRADO AFIN
-
+    private static void ejercicio1Afin(){
+        String alphabeto = "aábcdeéfghiíjklmnñoópqrstuúvwxyzAÁBCDEÉFGHIÍJKLMNÑOÓPQRSTUÚVWXYZ0123456789 ,.:;-()¿?";
+        int[][] claveCifrado = {
+                {50, 25, 0, 81, 4},
+                {10, 39, 19, 67, 51},
+                {34, 49, 63, 9, 56},
+                {31, 21, 33, 55, 6},
+                {82, 69, 34, 48, 1}
+        };
+        int[] claveCifrado2 =
+                {24, 11, 34,  70, 78} ;
+        Afin afin = new Afin(alphabeto, claveCifrado, claveCifrado2);
+        String msgDescifrado = afin.decode("¿ÍlÚgÑ0ucPsÁó:KÓHaw60íRbp5AuvpéUs9m8.Q0zr?ZDYlCZ0lÁNzaÍÚ9SlÚ;hR7:(GWACB6H8OláxlRLóAcGÍoeñPj6,e)0Égn5ZÓJ;,(ÚCEwópCÁ;G0lOu3úzjfÍoeñPivZhsVfe6;QnlBz5S6(;NOpLvO¿GjkrsIÚÚXUÁga?ÍÑ)u0.?9éRfHN4ÚmmaJ4o49BFNTÓóAyóeY0B2rñjpnjenXQóRoáxfuTÚZFÚmpóG9v-úld8S3XáéÓ8ÚALz-;NníPídA ÓUeÍEd.o vwgu:eñT8)E7U-?hXeqÚHgpdÉhKiEñTáTxC8)KybPd.ÑZVuálwf(8lú;8.xnóCsWP1JP)ñn9ÉÚ;4iÍék9.lCAsÉOB");
+        System.out.println(msgDescifrado.length());
+        printFormat(msgDescifrado);
+    }
 }

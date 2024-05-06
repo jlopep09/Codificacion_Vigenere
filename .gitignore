@@ -29,3 +29,7 @@ replay_pid*
 /.idea/modules.xml
 /.idea/vcs.xml
 /Codificacion_Vigenere.iml
+/.idea/libraries/commons_math_4.xml
+/out/production/Codificacion_Vigenere/datos (3).txt
+/out/production/Codificacion_Vigenere/inversa.py
+/.idea/libraries/Jama_1_0_3.xml
