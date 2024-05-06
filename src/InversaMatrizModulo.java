@@ -7,7 +7,7 @@ public class InversaMatrizModulo {
     // Función para calcular la inversa de una matriz de enteros modulo z
     public static int[][] inversaMatrizModulo(int[][] matriz, int z) {
 
-        String scriptPath = "C:\\Users\\ChispyDev\\Documents\\AA_repos\\Vigenere\\Codificacion_Vigenere\\src\\inversa.py";
+        String scriptPath = "C:\\Users\\josit\\Desktop\\Codificacion_Vigenere\\src\\inversa.py";
         String parametro = z+" ";
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < matriz.length; i++) {
