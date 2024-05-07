@@ -3,9 +3,49 @@
  */
 public class Main {
     public static void main(String[] args) {
-        //ejercicio1Hill();
-        ejercicio1Afin();
-
+        ejercicioEXAMFluxVigenere(); //Problema 2
+        ejercicioeXAMHill(); //Problema3 ejercicio 1
+        ejercicio2eXAMHill(); //Problema3 ejercicio 2
+    }
+    private static void ejercicioeXAMHill(){
+        String alphabeto = "ópqrstuúvwxyzaábcdeéfghiíjklmnño-()TUÚVWXYZAÁBCDEÉFGHIÍJKLMNÑOÓPQRS ,[.:;";
+        System.out.println(alphabeto.length()+"length");
+        int[][] claveCifrado = {
+                {50,25,49,21,4,45},
+                {10,39,19,67,51,32},
+                {34,49,63,9,56,24},
+                {31,21,33,55,6,8},
+                {13,69,34,48,16,11},
+                {12,4,62,27,51,3} };
+        Hill hill = new Hill(alphabeto, claveCifrado);
+        String msgDescifrado = hill.decode("XPÓNVtKt.Uxu:TCÉyXcaÚñx,JLFE,oNf-,úyfñHhJv;.GÑNéwÍrYXC[mÓñd(reGTtD[FbléVRCaPés,Ú,ba:ÑHbmYpKuithxIxl;lGxFZfúaucWhfHfrnYMr:b-WcyÉkLmfVáL.Óc.qXXznnñfóvGnP.E.[JéSDqXEQDégeoOxEÓoWQ([LEi.MgÉNRlrnqUTxKDGrVQAH, ÚSÑtzún-mqXIoE,SnIq:QiBw,dsXisBpCÓjyérNLdpWyruvqk");
+        System.out.println(msgDescifrado.length());
+        printFormat(msgDescifrado);
+        //System.out.println(hill.encode(msgDescifrado));
+    }
+    private static void ejercicio2eXAMHill(){
+        String alphabeto = "ópqrstuúvwxyzaábcdeéfghiíjklmnño-()TUÚVWXYZAÁBCDEÉFGHIÍJKLMNÑOÓPQRS ,[.:;";
+        System.out.println(alphabeto.length()+"length");
+        int[][] claveCifrado = {
+                {50,25,49,21,4,45},
+                {10,39,19,67,51,32},
+                {34,49,63,9,56,24},
+                {31,21,33,55,6,8},
+                {13,69,34,48,16,11},
+                {12,4,62,27,51,3} };
+        Hill hill = new Hill(alphabeto, claveCifrado);
+        String msgDescifrado = hill.decode("ÓdJrqJUáÉá[ahkOBSÁÑRG:OG[imQK;");
+        System.out.println(msgDescifrado.length());
+        printFormat(msgDescifrado);
+        System.out.println(hill.encode("José Antonio López Pérez"));
+    }
+    private static void ejercicioEXAMFluxVigenere() {
+        String alphabeto = "ópqrstuúvwxyzaábcdeéfghiíjklmnño-()TUÚVWXYZAÁBCDEÉFGHIÍJKLMNÑOÓPQRS ,[.:;";
+        String claveK = "VfKkqfVqomO(bcV";
+        String msgCifrado = "oVFÉnkSjÑmJGZxJa;FIvDU ;(óÍRÑJVécdóNáE;ZojÓyWM.IavdSNCPZAÍuz(N;pRtKGh(EñÍÉOJPóewÍkáwGC,v if.m;-SsPÓlvíZJn,KyU-UC;-G-z.scBFWYl,UrkS;XjxQWgwBWñKÓaíYmBBCb,wz:dn ,.[gÍBZXjz;KaíVzÓHÍndZxTxZE;BjzL[HvCEHOpdCÁóDNYTéJbaúkvIAHg,;QnÓ.QímQVZÉzátShEglb,u RXmMÚíodWoAKlÍm[j ÍÉFOnswkúÉwl f,gÑUWcKA:WqffRxhgT Í YzjÉJrÍkuHedññNCÓcYkúñe-qOEí[JddAmYMrkKCceéd.ZeadqzOboHzHMD)xéÉXsCerl qoEYI-RIíMpglePYmdtySEVIYÚñdÓID)";
+        Vigenere coder = new Vigenere(alphabeto, claveK);
+        String msgOriginal = coder.decode(msgCifrado, "flux");
+        printFormat(msgOriginal);
     }
 
     /**
@@ -50,6 +90,7 @@ public class Main {
         String msgOriginal = coder.decode(msgCifrado, "flux");
         printFormat(msgOriginal);
     }
+
     private static void ejercicio1Vigenere() {
         String alphabeto = "abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZáéíóúÁÉÍÓÚ0123456789 ,.:!-¿?()";
         String claveK = "UCBxHcl!6jñydiFoMB!vol!:da";
